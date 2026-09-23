@@ -1,31 +1,25 @@
 # Delivery System Assignment
 
-A logistics simulator for FastBox company. Simulates one day of operations by assigning packages to the nearest delivery agent, simulating deliveries, and generating a performance report.
+A Python-based logistics simulator for a fictional delivery company called **FastBox**.
+
+The system simulates one day of delivery operations by assigning packages to the nearest delivery agent, calculating delivery distances, tracking agent performance, and generating a final report.
 
 ## Approach
-1. **Normalization:** The system gracefully handles both list-based arrays (like `base_case.json`) and object-based maps (like `test_case_1.json`) for input data structures, ensuring robust parsing.
-2. **Assignment:** Agents are assigned packages based on the Euclidean distance from their *initial* location to the package's starting warehouse.
-3. **Simulation:** The simulator tracks cumulative distances as agents pick up packages from warehouses and drop them off at their final destinations.
-4. **Efficiency Metrics:** Determines the `best_agent` by calculating `total_distance / packages_delivered`. Agents with 0 deliveries are safely excluded from this calculation.
 
-## Requirements
-- Python 3.x
-- No external libraries required (uses only standard library).
+### 1. Data Normalization
 
-## How to Run
-Run the program by passing the input JSON file as an argument:
-```bash
-python src/delivery_system.py data/base_case.json
-```
+The system supports both input formats provided in the assignment:
 
-You can also specify a custom output file path:
-```bash
-python src/delivery_system.py data/test_case_1.json custom_report.json
-```
+- List-based `warehouses` and `agents`
+- Dictionary-based `warehouses` and `agents`
 
-## Input Format
-The program accepts a JSON file containing `warehouses`, `agents`, and `packages`.
-(See `data/base_case.json` for structure details)
+The data is normalized into a consistent internal structure before processing.
 
-## Output Format
-The program generates a `report.json` containing each agent's stats and the best agent overall.
+### 2. Package Assignment
+
+Each package is assigned to the nearest delivery agent based on the **Euclidean distance between the agent's initial location and the package's warehouse**.
+
+The Euclidean distance is calculated using:
+
+```text
+distance = √((x2 - x1)² + (y2 - y1)²)
