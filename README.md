@@ -1,25 +1,25 @@
 # Delivery System Assignment
 
-A Python-based logistics simulator for a fictional delivery company called **FastBox**.
-
-The system simulates one day of delivery operations by assigning packages to the nearest delivery agent, calculating delivery distances, tracking agent performance, and generating a final report.
+A logistics simulator for the fictional FastBox delivery company. The system simulates one day of operations by assigning packages to the nearest delivery agent, simulating deliveries, and generating a performance report.
 
 ## Approach
 
-### 1. Data Normalization
+1. **Normalization:** The system handles both list-based arrays (like `base_case.json`) and dictionary-based objects (like `test_case_1.json`) for input data structures, ensuring consistent processing.
 
-The system supports both input formats provided in the assignment:
+2. **Assignment:** Agents are assigned packages based on the Euclidean distance from their *initial* location to the package's starting warehouse.
 
-- List-based `warehouses` and `agents`
-- Dictionary-based `warehouses` and `agents`
+3. **Simulation:** The simulator tracks cumulative distances as agents pick up packages from warehouses and deliver them to their final destinations.
 
-The data is normalized into a consistent internal structure before processing.
+4. **Efficiency Metrics:** Determines the `best_agent` by calculating `total_distance / packages_delivered`. Agents with 0 deliveries are safely excluded from this calculation.
 
-### 2. Package Assignment
+## Requirements
 
-Each package is assigned to the nearest delivery agent based on the **Euclidean distance between the agent's initial location and the package's warehouse**.
+- Python 3.x
+- No external libraries required (uses only the Python standard library).
 
-The Euclidean distance is calculated using:
+## How to Run
 
-```text
-distance = √((x2 - x1)² + (y2 - y1)²)
+Run the program by passing the input JSON file as an argument:
+
+```bash
+python src/delivery_system.py data/base_case.json
